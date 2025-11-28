@@ -27,6 +27,7 @@ class ProdutoSerializer(serializers.ModelSerializer):
 class MovimentacaoSerializer(serializers.ModelSerializer):
     usuario_nome = serializers.ReadOnlyField(source="usuario.nome")
     produto_nome = serializers.ReadOnlyField(source="produto.nome")
+    usuario = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
     class Meta:
         model = Movimentacao
@@ -40,7 +41,3 @@ class MovimentacaoSerializer(serializers.ModelSerializer):
             "quantidade",
             "data_mov",
         ]
-
-    def create(self, validated_data):
-        validated_data["usuario"] = self.context["request"].user
-        return super().create(validated_data)

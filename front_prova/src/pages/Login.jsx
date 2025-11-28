@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./Login.css";
+import "../styles/Login.css";
 
 export default function Login() {
   const [login, setLogin] = useState("");
@@ -27,7 +27,7 @@ export default function Login() {
       if (response.ok) {
         localStorage.setItem("access", data.access);
         localStorage.setItem("refresh", data.refresh);
-        alert("Login realizado com sucesso!");
+        window.location.href = "/home";
       } else {
         setErro("Usuário ou senha incorretos.");
       }
